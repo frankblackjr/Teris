@@ -60,13 +60,14 @@ function createPiece(type) {
   } else if (type === 'S') {
     return [
       [0, 1, 1],
-      [0, 1, 0],
       [1, 1, 0],
+      [0, 0, 0],
     ];
   } else if (type === 'Z') {
     return [
       [1, 1, 0],
       [0, 1, 1],
+      [0, 0, 0]
     ];
   }
 }
@@ -110,7 +111,7 @@ function playerDrop() {
   if (collide(arena, player)) {
     player.pos.y--;
     merge(arena, player);
-    player.pos.y = 0;
+    playerReset();
   }
   dropCounter = 0;
 }
@@ -124,7 +125,10 @@ function playerMove(dir) {
 
 function playerReset() {
   const pieces = 'ILJOTSZ';
-  player.matrix = createPiece(pieces[pieces.length * Math.random() | 0])
+  player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
+  player.pos.y = 0;
+  player.pos.x =(arena[0].length / 2 | 0) -
+                (player.matrix[0].length / 2 | 0);
 }
 
 function playerRotate(dir) {
