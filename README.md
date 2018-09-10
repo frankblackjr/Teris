@@ -1,2 +1,2 @@
-# Teris
+# Tetris
 Tetris
